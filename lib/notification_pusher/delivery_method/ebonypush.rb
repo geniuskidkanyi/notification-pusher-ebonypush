@@ -4,7 +4,7 @@ module NotificationPusher
   module DeliveryMethod
     class EnonyPush < NotificationPusher::DeliveryMethod::Base
       def call
-        return unless options[:player_ids].any?
+        return unless options[:endpoint].any?
         push = Webpush.payload_send(
             message: options[:message],
             endpoint:options[:endpoint],
