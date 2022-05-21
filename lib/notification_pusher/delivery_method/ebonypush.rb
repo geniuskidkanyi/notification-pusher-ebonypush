@@ -5,7 +5,7 @@ module NotificationPusher
     class EnonyPush < NotificationPusher::DeliveryMethod::Base
       def call
         # return unless options.any?
-        binding.pry
+        # binding.pry
         push = Webpush.payload_send(
             message: options[:message],
             endpoint:options[:endpoint],
