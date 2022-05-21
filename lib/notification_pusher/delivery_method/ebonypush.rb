@@ -9,8 +9,8 @@ module NotificationPusher
         push = Webpush.payload_send(
             message: options[:message],
             endpoint:options[:endpoint],
-            p256dh: options[:keys][:p256dh],
-            auth: options[:keys][:auth],
+            p256dh: options[:p256dh],
+            auth: options[:auth],
             vapid: {
             subject: options[:subject],
             public_key: options[:vapid_public_key],
