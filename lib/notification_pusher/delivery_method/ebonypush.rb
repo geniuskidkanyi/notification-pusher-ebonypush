@@ -8,6 +8,7 @@ module NotificationPusher
         # binding.pry
         push = Webpush.payload_send(
             message: options[:message],
+            title: options[:subject],
             endpoint:options[:endpoint],
             p256dh: options[:p256dh],
             auth: options[:auth],
