@@ -5,34 +5,26 @@ module NotificationPusher
     class EnonyPush < NotificationPusher::DeliveryMethod::Base
       def call
         return unless options[:player_ids].any?
-
-        ::OneSignal::Notification.create params: {
-          app_id: options[:app_id],
-          url: url_param,
-          contents: contents_param,
-          headings: headings_param,
-          subtitle: subtitle_param,
-          include_player_ids: options[:player_ids]
-        }, opts: { auth_key: options[:auth_key] }
+        push = Webpush.payload_send(
+            message: options[:message],
+            endpoint:options[:endpoint],
+            p256dh: options[:keys][:p256dh],
+            auth: options[:keys][:auth],
+            vapid: {
+            subject: options[:subject],
+            public_key: options[:vapid_public_key],
+            private_key: options[:vapid_private_key]
+            },
+            ssl_timeout: 5, # value for Net::HTTP#ssl_timeout=, optional
+            open_timeout: 5, # value for Net::HTTP#open_timeout=, optional
+            read_timeout: 5 # value for Net::HTTP#read_timeout=, optional
+        )
+       
       end
 
       private
 
-      def url_param
-        options[:url]      || notification.metadata[:onesignal_url].to_h
-      end
-
-      def contents_param
-        options[:contents] || notification.metadata[:onesignal_contents].to_h
-      end
-
-      def headings_param
-        options[:headings] || notification.metadata[:onesignal_headings].to_h
-      end
-
-      def subtitle_param
-        options[:subtitle] || notification.metadata[:onesignal_subtitle].to_h
-      end
+    
     end
   end
 end
