@@ -11,7 +11,7 @@ module NotificationPusher
           body: options[:message],
         }
         push = Webpush.payload_send(
-            message: message,
+            message: JSON.generate(message),
             title: options[:subject],
             endpoint:options[:endpoint],
             p256dh: options[:p256dh],
