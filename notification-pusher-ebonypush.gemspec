@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-version = File.read(File.expand_path('../../VERSION', __dir__)).strip
+# version = File.read(File.expand_path('../../VERSION', __dir__)).strip
 
 Gem::Specification.new do |gem|
   gem.name                  = 'notification-pusher-ebonypush'
-  gem.version               = version
+  gem.version               = "4.0.0"
   gem.platform              = Gem::Platform::RUBY
   gem.summary               = 'A delivery method to send your notifications '\
                               'to devices on all platforms with webpush'
@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = '>= 2.7'
 
-  gem.add_dependency 'notification-pusher', version
+  gem.add_dependency 'notification-pusher'
 
   gem.add_development_dependency 'factory_bot'
   gem.add_development_dependency 'pry'
