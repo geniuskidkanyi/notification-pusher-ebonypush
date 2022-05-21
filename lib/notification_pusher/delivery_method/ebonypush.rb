@@ -9,6 +9,7 @@ module NotificationPusher
         message = {
           title:  options[:subject],
           body: options[:message],
+          url: options[:url],
         }
         push = Webpush.payload_send(
             message: JSON.generate(message),
