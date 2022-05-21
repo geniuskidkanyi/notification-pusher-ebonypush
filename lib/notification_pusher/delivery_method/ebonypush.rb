@@ -6,8 +6,12 @@ module NotificationPusher
       def call
         # return unless options.any?
         # binding.pry
+        message = {
+          title:  options[:subject],
+          body: options[:message],
+        }
         push = Webpush.payload_send(
-            message: options[:message],
+            message: message,
             title: options[:subject],
             endpoint:options[:endpoint],
             p256dh: options[:p256dh],
