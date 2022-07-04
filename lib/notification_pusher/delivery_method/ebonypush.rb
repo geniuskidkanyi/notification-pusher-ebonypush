@@ -27,7 +27,7 @@ module NotificationPusher
             open_timeout: 5, # value for Net::HTTP#open_timeout=, optional
             read_timeout: 5 # value for Net::HTTP#read_timeout=, optional
         )
-
+          binding.pry
         if options[:phone_number].present? && options[:username].present? && options[:account_sid].present? && options[:auth_token].present?
           client = Twilio::REST::Client.new(options[:account_sid], options[:auth_token])
           client.messages.create(
