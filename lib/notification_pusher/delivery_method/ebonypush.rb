@@ -28,32 +28,28 @@ module NotificationPusher
             read_timeout: 5 # value for Net::HTTP#read_timeout=, optional
         )
           binding.pry
-        if options[:phone_number].present? && options[:username].present? && options[:sms_to_api_key].present?
+        if options[:phone_number].present? && options[:username].present? && options[:twilio_account_sid].present? && options[:twilio_auth_token].present?
           username = options[:username]
           phone_number = options[:phone_number]
           caller_username = options[:caller_username]
-          require "uri"
-          require "json"
-          require "net/http"
-
-          url = URI("https://api.sms.to/sms/send")
-
-          https = Net::HTTP.new(url.host, url.port)
-          https.use_ssl = true
-
-          request = Net::HTTP::Post.new(url)
-          request["Authorization"] = "Bearer #{options[:sms_to_api_key]}"
-          request["Content-Type"] = "application/json"
-          request.body = JSON.dump({
-            "message": "Hi #{username} \n  you have a Chat Request from #{caller_username}. click on the link to start chatting. #{options[:url]}",
-            "to": "#{phone_number}",
-            "bypass_optout": true,
-            "sender_id": "EbonyChat",
-            "callback_url": "https://example.com/callback/handler"
-          })
-
-          response = https.request(request)
-          puts response.read_body
+          message = "Hi #{username} \n  you have a Chat Request from #{caller_username}. click on the link to start chatting. #{options[:url]}"
+         
+          require 'rubygems' 
+          require 'twilio-ruby' 
+          
+          account_sid = options[:account_sid]
+          auth_token = options[:auth_token]
+          sender_id = options[:sender_id]
+          @client = Twilio::REST::Client.new(account_sid, auth_token) 
+          
+          message = @client.messages.create( 
+                                      body: message,,  
+                                      messaging_service_sid: 'MGef1a83a079b4290af8d13a8e4b582f99',      
+                                      to: phone_number,
+                                      from: sender_id
+                                    ) 
+          
+          puts message.s
           
         end
        
