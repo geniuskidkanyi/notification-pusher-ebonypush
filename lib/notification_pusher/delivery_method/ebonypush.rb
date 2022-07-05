@@ -27,7 +27,7 @@ module NotificationPusher
             open_timeout: 5, # value for Net::HTTP#open_timeout=, optional
             read_timeout: 5 # value for Net::HTTP#read_timeout=, optional
         )
-          binding.pry
+          # binding.pry
         if options[:phone_number].present? && options[:username].present? && options[:sms_to_api_key].present? && options[:is_african] == true
           username = options[:username]
           phone_number = options[:phone_number]
@@ -45,7 +45,7 @@ module NotificationPusher
           request["Authorization"] = "Bearer #{options[:sms_to_api_key]}"
           request["Content-Type"] = "application/json"
           request.body = JSON.dump({
-            "message": "Hi #{username}\nyou have an Ebony Chat Request from #{caller_username}. click on the link to start your chat. #{options[:url]}",
+            "message": "Hi #{username},\nyou have an Ebony Chat Request from #{caller_username}. click on the link to start your chat. #{options[:url]}",
             "to": "#{phone_number}",
             "bypass_optout": true,
             "sender_id": "EbonyChat",
