@@ -32,7 +32,7 @@ module NotificationPusher
           username = options[:username]
           phone_number = options[:phone_number]
           caller_username = options[:caller_username]
-          message = "Hi #{username} \n you have a EbonyChat Request from #{caller_username}. click on the link to start chatting. #{options[:url]}"
+          message = "Hi there,\n you have a EbonyChat Request from #{caller_username}. click link to accept. #{options[:url]}"
          
           require 'rubygems' 
           require 'twilio-ruby' 
