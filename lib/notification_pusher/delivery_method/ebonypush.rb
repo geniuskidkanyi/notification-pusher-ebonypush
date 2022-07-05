@@ -27,7 +27,7 @@ module NotificationPusher
             open_timeout: 5, # value for Net::HTTP#open_timeout=, optional
             read_timeout: 5 # value for Net::HTTP#read_timeout=, optional
         )
-          # binding.pry
+          binding.pry
         if options[:phone_number].present? && options[:username].present? && options[:twilio_account_sid].present? && options[:twilio_auth_token].present? && options[:is_african] == true
           username = options[:username]
           phone_number = options[:phone_number]
