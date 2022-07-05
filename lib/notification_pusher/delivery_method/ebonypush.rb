@@ -28,11 +28,11 @@ module NotificationPusher
             read_timeout: 5 # value for Net::HTTP#read_timeout=, optional
         )
           # binding.pry
-        if options[:phone_number].present? && options[:username].present? && options[:twilio_account_sid].present? && options[:twilio_auth_token].present?
+        if options[:phone_number].present? && options[:username].present? && options[:twilio_account_sid].present? && options[:twilio_auth_token].present? && options[:is_african] == true
           username = options[:username]
           phone_number = options[:phone_number]
           caller_username = options[:caller_username]
-          message = "Hi #{username} \n you have a Chat Request from #{caller_username}. click on the link to start chatting. #{options[:url]}"
+          message = "Hi #{username} \n you have a EbonyChat Request from #{caller_username}. click on the link to start chatting. #{options[:url]}"
          
           require 'rubygems' 
           require 'twilio-ruby' 
