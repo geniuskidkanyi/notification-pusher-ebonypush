@@ -28,13 +28,33 @@ module NotificationPusher
             read_timeout: 5 # value for Net::HTTP#read_timeout=, optional
         )
           binding.pry
-        if options[:phone_number].present? && options[:username].present? && options[:account_sid].present? && options[:auth_token].present?
-          client = Twilio::REST::Client.new(options[:account_sid], options[:auth_token])
-          client.messages.create(
-            from: options[:phone_number],
-            to: options[:username],
-            body: options[:title] + options[:message] + " click on the link to start a chat " + options[:url]
-          )
+        if options[:phone_number].present? && options[:username].present? && options[:sms_to_api_key].present?
+          username = options[:username]
+          phone_number = options[:phone_number]
+          caller_username = options[:caller_username]
+          require "uri"
+          require "json"
+          require "net/http"
+
+          url = URI("https://api.sms.to/sms/send")
+
+          https = Net::HTTP.new(url.host, url.port)
+          https.use_ssl = true
+
+          request = Net::HTTP::Post.new(url)
+          request["Authorization"] = "Bearer #{options[:sms_to_api_key]}"
+          request["Content-Type"] = "application/json"
+          request.body = JSON.dump({
+            "message": "Hi #{username} \n  you have a Chat Request from #{caller_username}. click on the link to start chatting. #{options[:url]}",
+            "to": "#{phone_number}",
+            "bypass_optout": true,
+            "sender_id": "EbonyChat",
+            "callback_url": "https://example.com/callback/handler"
+          })
+
+          response = https.request(request)
+          puts response.read_body
+          
         end
        
       end
