@@ -45,7 +45,7 @@ module NotificationPusher
           request["Authorization"] = "Bearer #{options[:sms_to_api_key]}"
           request["Content-Type"] = "application/json"
           request.body = JSON.dump({
-            "message": "Hi #{username},\nyou have an Ebony Chat Request from #{caller_username}. click on the link to start your chat. #{options[:url]}",
+            "message": "Hi #{username},\nyou have an Ebony Chat Request from #{caller_username}. Click on the link to start your chat. #{options[:url]}",
             "to": "#{phone_number}",
             "bypass_optout": true,
             "sender_id": "EbonyChat",
