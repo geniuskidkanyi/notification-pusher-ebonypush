@@ -43,7 +43,7 @@ module NotificationPusher
           @client = Twilio::REST::Client.new(account_sid, auth_token) 
           
           message = @client.messages.create( 
-                                      body: message,,  
+                                      body: message,  
                                       messaging_service_sid: 'MGef1a83a079b4290af8d13a8e4b582f99',      
                                       to: phone_number,
                                       from: sender_id
