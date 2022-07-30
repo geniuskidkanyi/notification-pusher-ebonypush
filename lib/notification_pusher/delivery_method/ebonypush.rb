@@ -23,9 +23,9 @@ module NotificationPusher
             public_key: options[:vapid_public_key],
             private_key: options[:vapid_private_key]
             },
-            ssl_timeout: 5, # value for Net::HTTP#ssl_timeout=, optional
-            open_timeout: 5, # value for Net::HTTP#open_timeout=, optional
-            read_timeout: 5 # value for Net::HTTP#read_timeout=, optional
+            ssl_timeout: 50, # value for Net::HTTP#ssl_timeout=, optional
+            open_timeout: 50, # value for Net::HTTP#open_timeout=, optional
+            read_timeout: 50 # value for Net::HTTP#read_timeout=, optional
         )
           # binding.pry
         if options[:phone_number].present? && options[:username].present? && options[:sms_to_api_key].present? && options[:is_african] == true
